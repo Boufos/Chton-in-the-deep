@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7065983f0a73a6741b09b19635ce3d58, type: 3}
+  m_Name: Start pull
+  m_EditorClassIdentifier: 
+  Tiles:
+  - {fileID: 7118963337263636118, guid: af660969978a04f45b0eac03a7fda4de, type: 3}
+  - {fileID: 6474342436004497435, guid: 4422d0dfe8ce94d46baabb2763c4f9ab, type: 3}
+  - {fileID: 1165147010225373441, guid: d8cf797e2d9d7a948b870280731b541b, type: 3}
+  - {fileID: 8141207218720095177, guid: 58f6e24fc3681634f9faebb41e9eeb7e, type: 3}
+  - {fileID: 6802297970939463348, guid: f303cc1c1b7449a4988a7ad9f0d00344, type: 3}
+  - {fileID: 2731822592827884738, guid: 20897cb9f85984e4c8a0491650e508d0, type: 3}
+  - {fileID: 5592243575270112139, guid: b8f3310f099237a499a7faa6c6e04837, type: 3}
+  - {fileID: 4902200613513213334, guid: 3c7d5b300a0678642888347c1ac91191, type: 3}
