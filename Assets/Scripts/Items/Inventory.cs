@@ -38,10 +38,15 @@ public class Inventory : MonoBehaviour
             cell.Render(item);
         });
     }
+    private void Render(AssetItem item)
+    {
+        var cell = Instantiate(_inventoryCellTemplate, _container);
+        cell.Render(item);
+    }
     public void AddItem(AssetItem item)
     {
         _items.Add(item);
-        Render(_items);
+        Render(item);
     }
     public void RemoveItem(AssetItem item)
     {
@@ -50,7 +55,6 @@ public class Inventory : MonoBehaviour
     }
     public bool IsConaineItem(AssetItem item)
     {
-        
         return _items.Contains(item);
     }
 }
