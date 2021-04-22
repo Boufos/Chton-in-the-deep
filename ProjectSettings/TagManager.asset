@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - SpitSpawn
+  - MovableWall
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Enemy
   - Interactable object
   - Rect menu
-  - 
-  - 
+  - BattleWindow
+  - BattlePlayer
   - 
   - 
   - 

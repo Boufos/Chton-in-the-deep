@@ -18,7 +18,7 @@ abstract public class Pass : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Hero_Move>() != null && ParentTile.IsGoalAchived)
+        if (collision.gameObject.GetComponent<Hero>() != null && ParentTile.IsGoalAchived)
         {
             SwitchTile(collision.gameObject);
         }
