@@ -34,7 +34,8 @@ abstract public class Pass : MonoBehaviour
             if (i == 1)
             {
                 // _player.transform.position = position;
-                SceneManager.LoadScene(Level.Instance.NextSceneName);
+                if(Level.Instance.NextSceneName.Length > 0)
+                    SceneManager.LoadScene(Level.Instance.NextSceneName);
             }
             i++;
             yield return new WaitForSeconds(1.5f);

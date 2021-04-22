@@ -10,7 +10,6 @@ public class PromptObject : InteractableObject
     {
         if (_targetObject.IsActive)
         {
-            Destroy(this);
 
         }
         else

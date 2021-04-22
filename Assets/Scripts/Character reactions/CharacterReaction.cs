@@ -12,27 +12,19 @@ public class CharacterReaction : MonoBehaviour
 
     private int _noInteractionPhraseIndex = 0;
     
-    public string LookingPhraseBefore 
+    public string LookingPhrase 
     { 
         get {return GetPhrase(_phrases.LookingPhrasesBefore, ref _lookingPhraseIndex);} 
-    }
-    public string LookingPhraseAfter
-    {
-        get { return GetPhrase(_phrases.LookingPhrasesAfter, ref _lookingPhraseIndex); }
     }
     public string InteractionPhrase
     {
         get { return GetPhrase(_phrases.LookingPhrasesBefore, ref _interactionPhraseIndex); }
     }
-    public string InteractionPhraseAfter
-    {
-        get => GetPhrase(_phrases.AfterInteractionPhrases, ref _noInteractionPhraseIndex);
-    }
-    public string InteractionPhraseBefore
+    public string BeforeInteractionPhrase
     {
         get => GetPhrase(_phrases.BeforeInteractionPhrases, ref _noInteractionPhraseIndex);
     }
-    private Coroutine ShowPhrase;
+    private Coroutine _showPhrase;
     public IEnumerator ShowText(string text)
     {
         int i = 0;
@@ -55,12 +47,11 @@ public class CharacterReaction : MonoBehaviour
     }
     public void Reaction(string text)
     {
-        if (ShowPhrase != null)
+        if (_showPhrase != null)
         {
-            DialogPanel.Instance.Active(false);
-            StopCoroutine(ShowPhrase);
+            StopCoroutine(_showPhrase);
         }
-        ShowPhrase = StartCoroutine(ShowText(text));
+        _showPhrase = StartCoroutine(ShowText(text));
     }
     private string GetPhrase(List<string> phrases, ref int index)
     {

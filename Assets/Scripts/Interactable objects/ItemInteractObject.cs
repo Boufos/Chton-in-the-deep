@@ -4,40 +4,33 @@ using UnityEngine;
 
 public class ItemInteractObject : InteractableObject
 {
-
+    public List<AssetItem> Items;
     override public void Look()
     {
-        if(!IsActive)
-        {
-            _reactions.Reaction(_reactions.LookingPhraseBefore);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.LookingPhraseAfter);
-        }
+        _reactions.Reaction(_reactions.LookingPhrase);
+
     }
     override public void Interact()
     {
-        bool isInteracted = true;
-        foreach (var item in Items)
+ 
+        if (!IsActive)
+            _reactions.Reaction(_reactions.BeforeInteractionPhrase);
+        if (Items.Count > 0)
         {
-            if (_invetory.IsConaineItem(item))
-                _invetory.RemoveItem(item);
-            else
+            bool isInteracted = true;
+            foreach (var item in Items)
             {
-                isInteracted = false;
-                _reactions.Reaction(_reactions.InteractionPhrase);
+                if (_invetory.IsConaineItem(item))
+                    _invetory.RemoveItem(item);
+                else
+                {
+                    isInteracted = false;
+                    _reactions.Reaction(_reactions.InteractionPhrase);
+                }
             }
+            IsActive = isInteracted;
         }
-        IsActive = isInteracted;
-        if(IsActive)
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseAfter);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseBefore);
-        }
+
     }
 
 }

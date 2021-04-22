@@ -5,16 +5,12 @@ using UnityEngine;
 public class GoalObject : InteractableObject
 {
     [SerializeField]
-    private List<ItemInteractObject> _activators;
+    private List<InteractableObject> _activators;
     override public void Look()
     {
         if (!IsActive)
         {
-            _reactions.Reaction(_reactions.LookingPhraseBefore);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.LookingPhraseAfter);
+            _reactions.Reaction(_reactions.LookingPhrase);
         }
     }
     override public void Interact()
@@ -24,22 +20,17 @@ public class GoalObject : InteractableObject
         {
             isActive = isActive && _activators[i].IsActive;
         }
-        if(isActive && !IsActive)
+        if(!isActive)
+        {
+            _reactions.Reaction(_reactions.BeforeInteractionPhrase);
+        }
+        else 
         {
             IsActive = true;
-
             GetComponentInParent<Tile>().SetIsActive(true);
             _reactions.Reaction(_reactions.InteractionPhrase);
+            
         }
-
-        if(IsActive)
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseAfter);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseBefore);
-        }
-     
+   
     }
 }
