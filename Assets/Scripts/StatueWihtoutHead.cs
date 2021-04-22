@@ -7,7 +7,7 @@ public class StatueWihtoutHead : ItemInteractObject
     override public void Interact()
     {
         base.Interact();
-        if(IsActive)
+        if(IsActivated)
         {
 
             Level.Instance.CurrentTile.SetIsActive(true);

@@ -13,7 +13,7 @@ public class ItemInteractObject : InteractableObject
     override public void Interact()
     {
  
-        if (!IsActive)
+        if (!IsActivated)
             _reactions.Reaction(_reactions.BeforeInteractionPhrase);
         if (Items.Count > 0)
         {
@@ -28,7 +28,7 @@ public class ItemInteractObject : InteractableObject
                     _reactions.Reaction(_reactions.InteractionPhrase);
                 }
             }
-            IsActive = isInteracted;
+            IsActivated = isInteracted;
         }
 
     }

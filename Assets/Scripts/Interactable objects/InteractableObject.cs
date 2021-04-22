@@ -10,7 +10,7 @@ public class InteractableObject : MonoBehaviour, IObject
 
     [HideInInspector]
     public Collider2D Collider;
-    public bool IsActive;
+    public bool IsActivated;
 
     protected CharacterReaction _reactions;
     protected Inventory _invetory => Inventory.Instance;
@@ -58,13 +58,17 @@ public class InteractableObject : MonoBehaviour, IObject
         Collider.enabled = false;
     }
     protected bool IsOnPlayer()
-    {
+    {   
+        if(_ray.collider == null)
+        {
+            return true;
+        }
         return IsNeedLayer(_ray, _hero.gameObject.layer);
     }
-    private RaycastHit2D GetToPlayerPlayerRaycast(Vector2 target)
+    private RaycastHit2D GetToPlayerPlayerRaycast(Vector3 target)
     {
 
-        var heading = (Vector2)_hero.transform.position - target;
+        var heading = _hero.transform.position - target;
         var toPlyerDistance = Vector2.Distance(_hero.transform.position, transform.position);
         var toPlayerDirection = heading / heading.magnitude;
         Debug.DrawRay(transform.position, toPlyerDistance * toPlayerDirection, Color.red);
@@ -72,10 +76,6 @@ public class InteractableObject : MonoBehaviour, IObject
     }
     private bool IsNeedLayer(RaycastHit2D raycast, int layer)
     {
-        if(raycast.collider == null)
-        {
-            return true;
-        }
         return raycast.collider.gameObject.layer == layer;
     }
 

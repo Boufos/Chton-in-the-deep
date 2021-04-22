@@ -8,7 +8,7 @@ public class PromptObject : InteractableObject
     private InteractableObject _targetObject;
     protected override void EnableRectMenu()
     {
-        if (_targetObject.IsActive)
+        if (_targetObject.IsActivated)
         {
 
         }

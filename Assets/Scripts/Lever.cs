@@ -17,8 +17,8 @@ public class Lever : InteractableObject
     public override void Interact()
     {
         base.Interact();
-        IsActive = !IsActive;
-        if(IsActive)
+        IsActivated = true;
+        if(IsActivated)
         {
             OnActive?.Invoke();
         }
@@ -27,14 +27,16 @@ public class Lever : InteractableObject
     {
         foreach(var target in _targets)
         {
-            EnabledObject(target);
+            if (target != null )
+                EnabledObject(target);
         }
     }
     public void DesabledObjects()
     {
         foreach (var target in _targets)
         {
-            DisabledObject(target);
+            if(target != null && target.activeSelf)
+                DisabledObject(target);
         }
     }
     private void EnabledObject(GameObject gameObject)
@@ -42,19 +44,20 @@ public class Lever : InteractableObject
         gameObject.SetActive(true);
 
         var animation = gameObject.GetComponent<Animation>();
-
-        animation.Play(); 
+        if (!animation.isPlaying)
+            animation.Play(); 
 
 
     }
     private void DisabledObject(GameObject gameObject)
     {
-
-        if(_onDestroyBlock == null)
+        var animation = gameObject.GetComponent<Animation>();
+        if (!animation.isPlaying)
         {
-            var animation = gameObject.GetComponent<Animation>();
+          
             animation.Play();
-            _onDestroyBlock = StartCoroutine(DestroyTarge(gameObject, animation.clip.length));
+          //  _onDestroyBlock = StartCoroutine(DestroyTarge(gameObject, animation.clip.length));
+            Destroy(gameObject, animation.clip.length);
         }
     }
     private IEnumerator DestroyTarge(GameObject gameObject, float time)

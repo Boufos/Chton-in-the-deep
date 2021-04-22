@@ -13,7 +13,7 @@ public class StatueHead : StorageObject
     public override void Interact()
     {
         base.Interact();
-        if (IsActive)
+        if (IsActivated)
         {
             DisabledObject(gameObject);
         }

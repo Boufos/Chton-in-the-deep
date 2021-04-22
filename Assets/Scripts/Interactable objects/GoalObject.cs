@@ -8,7 +8,7 @@ public class GoalObject : InteractableObject
     private List<InteractableObject> _activators;
     override public void Look()
     {
-        if (!IsActive)
+        if (!IsActivated)
         {
             _reactions.Reaction(_reactions.LookingPhrase);
         }
@@ -18,7 +18,7 @@ public class GoalObject : InteractableObject
         bool isActive = true;
         for (int i = 0; i < _activators.Count; i++)
         {
-            isActive = isActive && _activators[i].IsActive;
+            isActive = isActive && _activators[i].IsActivated;
         }
         if(!isActive)
         {
@@ -26,7 +26,7 @@ public class GoalObject : InteractableObject
         }
         else 
         {
-            IsActive = true;
+            IsActivated = true;
             GetComponentInParent<Tile>().SetIsActive(true);
             _reactions.Reaction(_reactions.InteractionPhrase);
             
