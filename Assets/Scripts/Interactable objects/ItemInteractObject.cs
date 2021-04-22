@@ -7,30 +7,43 @@ public class ItemInteractObject : InteractableObject
     public List<AssetItem> Items;
     override public void Look()
     {
-        _reactions.Reaction(_reactions.LookingPhrase);
+        _reactions.SetReaction(_reactions.LookingPhrase);
 
     }
     override public void Interact()
     {
- 
-        if (!IsActivated)
-            _reactions.Reaction(_reactions.BeforeInteractionPhrase);
-        if (Items.Count > 0)
+        bool isInteracted = true;
+        if (Items.Count > 0 && !IsActivated)
         {
-            bool isInteracted = true;
+
             foreach (var item in Items)
             {
                 if (_invetory.IsConaineItem(item))
+                {
                     _invetory.RemoveItem(item);
+                }
                 else
                 {
                     isInteracted = false;
-                    _reactions.Reaction(_reactions.InteractionPhrase);
+                    break;
                 }
             }
-            IsActivated = isInteracted;
-        }
 
+        }
+        else
+        {
+            isInteracted = false;
+        }
+        if (isInteracted)
+        {
+            _reactions.SetReaction(_reactions.InteractionPhrase);
+        }
+        else
+        {
+            _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
+
+        }
+        IsActivated = isInteracted;
     }
 
 }

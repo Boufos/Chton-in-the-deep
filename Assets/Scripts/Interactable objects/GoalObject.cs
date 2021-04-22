@@ -10,7 +10,7 @@ public class GoalObject : InteractableObject
     {
         if (!IsActivated)
         {
-            _reactions.Reaction(_reactions.LookingPhrase);
+            _reactions.SetReaction(_reactions.LookingPhrase);
         }
     }
     override public void Interact()
@@ -22,13 +22,13 @@ public class GoalObject : InteractableObject
         }
         if(!isActive)
         {
-            _reactions.Reaction(_reactions.BeforeInteractionPhrase);
+            _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
         }
         else 
         {
             IsActivated = true;
             GetComponentInParent<Tile>().SetIsActive(true);
-            _reactions.Reaction(_reactions.InteractionPhrase);
+            _reactions.SetReaction(_reactions.InteractionPhrase);
             
         }
    

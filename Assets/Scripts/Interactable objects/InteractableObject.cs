@@ -39,14 +39,14 @@ public class InteractableObject : MonoBehaviour, IObject
     protected void OnMouseDown()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        _ray = GetToPlayerPlayerRaycast(mousePosition);
+        _ray = GetToPlayerPlayerRaycast(transform.position);
         if (IsOnPlayer() && _ray.distance < toPlayerDistanceLimit)
         {
             EnableRectMenu();
         }
         else
         {
-            _reactions.Reaction("Не могу. Слишком далеко.");
+            _reactions.SetReaction("Не могу. Слишком далеко.");
         }
 
     }

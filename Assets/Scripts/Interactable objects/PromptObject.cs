@@ -22,7 +22,7 @@ public class PromptObject : InteractableObject
     }
     override public void Look()
     {
-        _reactions.Reaction(_reactions.InteractionPhrase);
+        _reactions.SetReaction(_reactions.InteractionPhrase);
     }
     override public void Interact()
     {

@@ -50,13 +50,7 @@ public class Inventory : MonoBehaviour
     }
     public bool IsConaineItem(AssetItem item)
     {
-        foreach(var child in _items)
-        {
-            if(item.Name == child.Name)
-            {
-                return true;
-            }
-        }
-        return false;
+        
+        return _items.Contains(item);
     }
 }

@@ -9,7 +9,7 @@ public class StorageObject : InteractableObject
     {
         if (Items.Count > 0)
         {
-            _reactions.Reaction(_reactions.LookingPhrase);
+            _reactions.SetReaction(_reactions.LookingPhrase);
         }
     }
     public override void Interact()
@@ -21,8 +21,9 @@ public class StorageObject : InteractableObject
                 _invetory.AddItem(Items[i]);
                 Items.Remove(Items[i]);
             }
-            _reactions.Reaction(_reactions.InteractionPhrase);
+            _reactions.SetReaction(_reactions.InteractionPhrase);
         }
+        
     }
 }
 
