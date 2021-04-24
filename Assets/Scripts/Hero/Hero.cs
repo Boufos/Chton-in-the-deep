@@ -12,7 +12,7 @@ public class Hero : Character
     }
 
     [SerializeField] private LayerMask _ground;
-    [SerializeField] private Animator _anim;
+   // [SerializeField] private Animator _anim;
     [SerializeField] private Transform _groundCheckPosition;
 
     [SerializeField] private float _radiusGroundCheck;
@@ -76,7 +76,7 @@ public class Hero : Character
         _currentJumpTime += Time.deltaTime;
         #endregion
 
-        PlayAnimation();
+        //PlayAnimation();
     }
 
     private void Interaction()
@@ -84,22 +84,22 @@ public class Hero : Character
         _stateAnimation = StateAnimation.interraction;
     }
     
-    private void PlayAnimation()
-    {
-        switch (_stateAnimation)
-        {
-            case StateAnimation.interraction:
-                _anim.Play(_nameAnimationInteraction);
-                break;
-            case StateAnimation.stay:
-                _anim.Play(_nameAnimationStay);
-                break;
-            case StateAnimation.move:
-                _anim.Play(_nameAnimationMove);
-                break;
-            default:
-                break;
-        }
-    }
+    //private void PlayAnimation()
+    //{
+    //    switch (_stateAnimation)
+    //    {
+    //        case StateAnimation.interraction:
+    //            _anim.Play(_nameAnimationInteraction);
+    //            break;
+    //        case StateAnimation.stay:
+    //            _anim.Play(_nameAnimationStay);
+    //            break;
+    //        case StateAnimation.move:
+    //            _anim.Play(_nameAnimationMove);
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 
 }
