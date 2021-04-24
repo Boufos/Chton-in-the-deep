@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5336605966048752658}
   - component: {fileID: 5336605966048752653}
   - component: {fileID: 5336605966048752663}
+  - component: {fileID: 2693147972717629191}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _helth: 10
+  _restart: {fileID: 0}
 --- !u!50 &5336605966048752656
 Rigidbody2D:
   serializedVersion: 4
@@ -129,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punch: {fileID: 5336605966917026743}
   punchRadius: 0.7
+  animAttack: {fileID: 0}
 --- !u!95 &5336605966048752663
 Animator:
   serializedVersion: 3
@@ -148,6 +151,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2693147972717629191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336605966048752652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574b9b519ea100549a17407a99dfc867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 5
 --- !u!1 &5336605966682928641
 GameObject:
   m_ObjectHideFlags: 0

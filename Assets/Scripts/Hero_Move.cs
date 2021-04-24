@@ -70,6 +70,7 @@ public class Hero_Move : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump")&&IsGrounded)
         {
+            _rb.gravityScale = 1;
             _rb.velocity = new Vector2(_rb.velocity.x, JumpForce);
            
         }
