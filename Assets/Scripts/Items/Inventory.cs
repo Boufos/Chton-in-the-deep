@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         _items.Remove(item);
         Render(_items);
     }
-    public bool IsConaineItem(AssetItem item)
+    public bool IsConåaineItem(AssetItem item)
     {
         return _items.Contains(item);
     }

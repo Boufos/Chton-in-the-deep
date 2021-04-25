@@ -18,7 +18,7 @@ public class ItemInteractObject : InteractableObject
 
             foreach (var item in Items)
             {
-                if (_invetory.IsConaineItem(item))
+                if (_invetory.IsConåaineItem(item))
                 {
                     _invetory.RemoveItem(item);
                 }
