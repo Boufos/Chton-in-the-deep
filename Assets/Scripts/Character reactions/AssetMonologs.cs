@@ -5,11 +5,7 @@ using UnityEngine;
 public class AssetMonologs : ScriptableObject
 {
     [TextArea]
-    public  List<string> LookingPhrasesBefore;
-    [TextArea]
-    public List<string> LookingPhrasesAfter;
-    [TextArea]
-    public List<string> AfterInteractionPhrases;
+    public  List<string> LookingPhrases;
     [TextArea]
     public List<string> InteractionPhrases;
     [TextArea]

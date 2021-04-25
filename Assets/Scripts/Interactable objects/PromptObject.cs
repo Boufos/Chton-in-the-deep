@@ -8,9 +8,8 @@ public class PromptObject : InteractableObject
     private InteractableObject _targetObject;
     protected override void EnableRectMenu()
     {
-        if (_targetObject.IsActive)
+        if (_targetObject.IsActivated)
         {
-            Destroy(this);
 
         }
         else
@@ -23,7 +22,7 @@ public class PromptObject : InteractableObject
     }
     override public void Look()
     {
-        _reactions.Reaction(_reactions.InteractionPhrase);
+        _reactions.SetReaction(_reactions.InteractionPhrase);
     }
     override public void Interact()
     {

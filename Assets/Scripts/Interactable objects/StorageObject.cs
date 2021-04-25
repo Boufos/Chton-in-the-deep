@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class StorageObject : InteractableObject
 {
-
+    public List<AssetItem> Items;
     public override void Look()
     {
         if (Items.Count > 0)
         {
-            _reactions.Reaction(_reactions.LookingPhraseBefore);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.LookingPhraseAfter);
+            _reactions.SetReaction(_reactions.LookingPhrase);
         }
     }
     public override void Interact()
@@ -24,17 +20,10 @@ public class StorageObject : InteractableObject
             {
                 _invetory.AddItem(Items[i]);
                 Items.Remove(Items[i]);
-                _reactions.Reaction(_reactions.InteractionPhrase);
             }
+            _reactions.SetReaction(_reactions.InteractionPhrase);
         }
-        if(Items.Count > 0)
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseAfter);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseBefore);
-        }
+        
     }
 }
 

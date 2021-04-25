@@ -38,25 +38,23 @@ public class Inventory : MonoBehaviour
             cell.Render(item);
         });
     }
+    private void Render(AssetItem item)
+    {
+        var cell = Instantiate(_inventoryCellTemplate, _container);
+        cell.Render(item);
+    }
     public void AddItem(AssetItem item)
     {
         _items.Add(item);
-        Render(_items);
+        Render(item);
     }
     public void RemoveItem(AssetItem item)
     {
         _items.Remove(item);
         Render(_items);
     }
-    public bool IsConaineItem(AssetItem item)
+    public bool IsConåaineItem(AssetItem item)
     {
-        foreach(var child in _items)
-        {
-            if(item.Name == child.Name)
-            {
-                return true;
-            }
-        }
-        return false;
+        return _items.Contains(item);
     }
 }

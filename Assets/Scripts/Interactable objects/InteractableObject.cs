@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 [RequireComponent(typeof(CharacterReaction))]
-public class InteractableObject : MonoBehaviour,IObject
+[RequireComponent(typeof(Collider2D))]
+public class InteractableObject : MonoBehaviour, IObject
 {
-    public RectMenu MenuPrefab;
+
     [HideInInspector]
     public Collider2D Collider;
-    public List<AssetItem> Items;
-    public bool IsActive;
+    public bool IsActivated;
 
     protected CharacterReaction _reactions;
     protected Inventory _invetory => Inventory.Instance;
-    protected DialogPanel _dialogPanel;
+    protected DialogPanel _dialogPanel => DialogPanel.Instance;
     [SerializeField]
     protected Hero _hero;
     [SerializeField]
@@ -22,36 +23,29 @@ public class InteractableObject : MonoBehaviour,IObject
     protected RectMenu _menu;
     [SerializeField]
     protected int _layerMask;
+    protected RectMenu MenuPrefab;
 
     private void Awake()
     {
+        MenuPrefab = Resources.Load<RectMenu>("Prefabs/Rect menu");
         Collider = GetComponent<Collider2D>();
         _reactions = GetComponent<CharacterReaction>();
         _hero = FindObjectOfType<Hero>();
         _layerMask = (1 << _hero.gameObject.layer) | (1 << LayerMask.NameToLayer("Ground"));
     }
-    virtual public void Look()
-    {
-        //Íàâåðíîå íóæíî, ÷òî - òî ñêàçàòü
-       // _reactions.Reaction(_reactions.LookingPhrase);
-    }
-    virtual public void Interact()
-    {
-
-        //Íàâåðíîå íóæíî, ÷òî - òî ñêàçàòü
-    }
+    virtual public void Look() { }
+    virtual public void Interact() { }
 
     protected void OnMouseDown()
     {
-
-        _ray = GetToPlayerPlayerRaycast();
+        _ray = GetToPlayerPlayerRaycast(transform.position);
         if (IsOnPlayer() && _ray.distance < toPlayerDistanceLimit)
         {
             EnableRectMenu();
         }
         else
         {
-            _reactions.Reaction("Íå ìîãó. Ñëèøêîì äàëåêî. ");
+            _reactions.SetReaction("�� ����. ������� ������.");
         }
 
     }
@@ -63,13 +57,17 @@ public class InteractableObject : MonoBehaviour,IObject
         Collider.enabled = false;
     }
     protected bool IsOnPlayer()
-    {
+    {   
+        if(_ray.collider == null)
+        {
+            return true;
+        }
         return IsNeedLayer(_ray, _hero.gameObject.layer);
     }
-    private RaycastHit2D GetToPlayerPlayerRaycast()
+    private RaycastHit2D GetToPlayerPlayerRaycast(Vector3 target)
     {
 
-        var heading = _hero.transform.position - transform.position;
+        var heading = _hero.transform.position - target;
         var toPlyerDistance = Vector2.Distance(_hero.transform.position, transform.position);
         var toPlayerDirection = heading / heading.magnitude;
         Debug.DrawRay(transform.position, toPlyerDistance * toPlayerDirection, Color.red);
