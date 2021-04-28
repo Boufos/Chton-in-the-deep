@@ -40,6 +40,7 @@ public class StairAction : MonoBehaviour
             _rigidBody.gravityScale = 0;
             transform.position += Vector3.up * inputVertical * Speed * Time.deltaTime;
 
+
         }
 
     }

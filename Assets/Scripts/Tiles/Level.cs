@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Level : MonoBehaviour
 {
+    static public Level Instance;
     public Tile CurrentTile;
     public TilesGenerator Generator;
     [HideInInspector]
     public Animation BlackoutAnimation;
     public int MaxTileCount;
     public static int TileCount;
-    static public Level Instance;
     public string NextSceneName;
     [SerializeField]
     private GameObject _blackoutPanel;

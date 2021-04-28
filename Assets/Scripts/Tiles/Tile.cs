@@ -13,7 +13,20 @@ public class Tile : MonoBehaviour
     public TilePulls Pull;
     [HideInInspector]
     public Borders Borders;
-    public bool IsGoalAchived;
+    private bool _isOuterPassOpen;
+    public bool IsGoalAchived
+    {
+        get => _isOuterPassOpen;
+        set
+        {
+            _isOuterPassOpen = value;
+            if (value)
+            {
+                Exit.gameObject.SetActive(_isOuterPassOpen);
+            }
+
+        }
+    }
     public int ID;
     private Hero _player;
     private void Awake()
