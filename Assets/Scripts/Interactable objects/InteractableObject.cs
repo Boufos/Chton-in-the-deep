@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,18 @@ public class InteractableObject : MonoBehaviour, IObject
     [HideInInspector]
     public Collider2D Collider;
     public bool IsActivated;
+    protected bool _isActivated
+    {
+        get => IsActivated;
+        set
+        {
+            IsActivated = value;
+            if (value && OnEnableRectMenu != null)
+            {
+                OnEnableRectMenu = null;
+            }
+        }
+    }
 
     protected CharacterReaction _reactions;
     protected Inventory _invetory => Inventory.Instance;
@@ -24,7 +37,11 @@ public class InteractableObject : MonoBehaviour, IObject
     [SerializeField]
     protected int _layerMask;
     protected RectMenu MenuPrefab;
-
+    protected Action<bool, bool> OnEnableRectMenu;
+    [SerializeField]
+    protected virtual bool isLookable  => true; 
+    [SerializeField]
+    protected virtual bool isInteractable  => true; 
     private void Awake()
     {
         MenuPrefab = Resources.Load<RectMenu>("Prefabs/Rect menu");
@@ -33,32 +50,44 @@ public class InteractableObject : MonoBehaviour, IObject
         _hero = FindObjectOfType<Hero>();
         _layerMask = (1 << _hero.gameObject.layer) | (1 << LayerMask.NameToLayer("Ground"));
     }
-    virtual public void Look() { }
+    virtual public void Look()
+    {
+        _reactions.SetReaction(_reactions.LookingPhrase);
+    }
     virtual public void Interact() { }
-
+    private void OnEnable()
+    {
+        if (OnEnableRectMenu == null)
+            OnEnableRectMenu += EnableRectMenu;
+    }
+    private void OnDisable()
+    {
+        if (OnEnableRectMenu != null)
+            OnEnableRectMenu -= EnableRectMenu;
+    }
     protected void OnMouseDown()
+    {
+        OnEnableRectMenu?.Invoke(isLookable, isInteractable);
+    }
+    virtual protected void EnableRectMenu(bool isLook, bool isInteract)
     {
         _ray = GetToPlayerPlayerRaycast(transform.position);
         if (IsOnPlayer() && _ray.distance < toPlayerDistanceLimit)
         {
-            EnableRectMenu();
+            _menu = Instantiate(MenuPrefab);
+            _menu.transform.position = transform.position;
+            _menu.LookButton.gameObject.SetActive(isLook);
+            _menu.InteractionButton.gameObject.SetActive(isInteract);
+            _menu.Parent = this;
+            //Collider.enabled = false;
+            return;
         }
-        else
-        {
-            _reactions.SetReaction("Не могу. Слишком далеко.");
-        }
+        _reactions.SetReaction("Не могу. Слишком далеко.");
 
-    }
-    virtual protected void EnableRectMenu()
-    {
-
-        _menu = Instantiate(MenuPrefab, transform.position, MenuPrefab.transform.rotation);
-        _menu.Parent = this;
-        Collider.enabled = false;
     }
     protected bool IsOnPlayer()
-    {   
-        if(_ray.collider == null)
+    {
+        if (_ray.collider == null)
         {
             return true;
         }
@@ -66,7 +95,6 @@ public class InteractableObject : MonoBehaviour, IObject
     }
     private RaycastHit2D GetToPlayerPlayerRaycast(Vector3 target)
     {
-
         var heading = _hero.transform.position - target;
         var toPlyerDistance = Vector2.Distance(_hero.transform.position, transform.position);
         var toPlayerDirection = heading / heading.magnitude;

@@ -5,13 +5,8 @@ using UnityEngine;
 public class StorageObject : InteractableObject
 {
     public List<AssetItem> Items;
-    public override void Look()
-    {
-        if (Items.Count > 0)
-        {
-            _reactions.SetReaction(_reactions.LookingPhrase);
-        }
-    }
+    protected override bool isLookable => false;
+    protected override bool isInteractable => true;
     public override void Interact()
     {
         if (Items.Count > 0)
@@ -22,8 +17,8 @@ public class StorageObject : InteractableObject
                 Items.Remove(Items[i]);
             }
             _reactions.SetReaction(_reactions.InteractionPhrase);
+            _isActivated = true;
         }
-        
     }
 }
 

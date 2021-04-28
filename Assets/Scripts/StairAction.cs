@@ -8,6 +8,7 @@ public class StairAction : MonoBehaviour
     public float Speed;
     private Rigidbody2D _rigidBody;
     private float _startGravityScale;
+
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -21,6 +22,7 @@ public class StairAction : MonoBehaviour
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<Stair>() != null)
@@ -29,6 +31,7 @@ public class StairAction : MonoBehaviour
             _rigidBody.gravityScale = _startGravityScale;
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<Stair>() != null)

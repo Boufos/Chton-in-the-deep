@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
             Instance = this;
         }
 
-      //  gameObject.SetActive(false);
+        //  gameObject.SetActive(false);
 
     }
     private void OnEnable()
@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
     }
     private void Render(List<AssetItem> items)
     {
-        foreach(Transform child in _container)
+        foreach (Transform child in _container)
         {
             Destroy(child.gameObject);
         }
@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         _items.Remove(item);
         Render(_items);
     }
-    public bool IsConåaineItem(AssetItem item)
+    public bool IsContaineItem(AssetItem item)
     {
         return _items.Contains(item);
     }

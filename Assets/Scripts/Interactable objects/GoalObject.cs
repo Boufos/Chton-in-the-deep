@@ -6,13 +6,8 @@ public class GoalObject : InteractableObject
 {
     [SerializeField]
     private List<InteractableObject> _activators;
-    override public void Look()
-    {
-        if (!IsActivated)
-        {
-            _reactions.SetReaction(_reactions.LookingPhrase);
-        }
-    }
+    protected override bool isLookable => true;
+    protected override bool isInteractable => true;
     override public void Interact()
     {
         bool isActive = true;
@@ -20,17 +15,17 @@ public class GoalObject : InteractableObject
         {
             isActive = isActive && _activators[i].IsActivated;
         }
-        if(!isActive)
+        if (!isActive)
         {
             _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
         }
-        else 
+        else
         {
-            IsActivated = true;
+            _isActivated = true;
             GetComponentInParent<Tile>().SetIsActive(true);
             _reactions.SetReaction(_reactions.InteractionPhrase);
-            
+
         }
-   
+
     }
 }

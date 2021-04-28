@@ -5,14 +5,10 @@ using UnityEngine.Events;
 
 public class StatueHead : StorageObject
 {
-    public override void Look()
-    {
-        base.Look();
-    }
     public override void Interact()
     {
         base.Interact();
-        if (IsActivated)
+        if (_isActivated)
         {
             DisabledObject(gameObject);
         }
@@ -20,9 +16,8 @@ public class StatueHead : StorageObject
 
     private void DisabledObject(GameObject gameObject)
     {
-
-            var animation = gameObject.GetComponent<Animation>();
-            animation.Play();
-            Destroy(gameObject, animation.clip.length);
+        //    var animation = gameObject.GetComponent<Animation>();
+        //    animation.Play();
+        Destroy(gameObject);//, animation.clip.length);
     }
 }

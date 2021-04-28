@@ -394,7 +394,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.45490196}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -432,8 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2b87b9f597fe1458109a6721265b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookButton: {fileID: 0}
-  InteractionButton: {fileID: 0}
+  LookButton: {fileID: 733963352885278047}
+  InteractionButton: {fileID: 2787890022878947764}
   Parent: {fileID: 0}
   MaxDistanceToCursor: 2.5
 --- !u!58 &-8405666503193674964

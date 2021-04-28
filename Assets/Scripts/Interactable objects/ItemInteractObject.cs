@@ -5,11 +5,8 @@ using UnityEngine;
 public class ItemInteractObject : InteractableObject
 {
     public List<AssetItem> Items;
-    override public void Look()
-    {
-        _reactions.SetReaction(_reactions.LookingPhrase);
-
-    }
+    protected override bool isLookable => true;
+    protected override bool isInteractable => true;
     override public void Interact()
     {
         bool isInteracted = true;
@@ -18,7 +15,7 @@ public class ItemInteractObject : InteractableObject
 
             foreach (var item in Items)
             {
-                if (_invetory.IsConåaineItem(item))
+                if (_invetory.IsContaineItem(item))
                 {
                     _invetory.RemoveItem(item);
                 }
@@ -43,7 +40,7 @@ public class ItemInteractObject : InteractableObject
             _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
 
         }
-        IsActivated = isInteracted;
+        _isActivated = isInteracted;
     }
 
 }

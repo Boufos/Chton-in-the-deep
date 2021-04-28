@@ -14,5 +14,6 @@ public class LookButton : MonoBehaviour
     private void OnMouseDown()
     {
         _menu.Parent.Look();
+
     }
 }
