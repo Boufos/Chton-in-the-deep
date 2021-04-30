@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4269200195269105198}
   - component: {fileID: 2695790052538701922}
   - component: {fileID: -712026707263992180}
+  - component: {fileID: 8863755712689642066}
   m_Layer: 0
   m_Name: Artefact
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895792416249678299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.597, y: 0.078, z: -2}
-  m_LocalScale: {x: 0.07608298, y: 0.10949212, z: 0.3709045}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,3 +100,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
+--- !u!114 &8863755712689642066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895792416249678299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e693836629037b14d8b03e552204876a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
+  Type: 
+  IsFriendly: 0
+  Target: {fileID: 0}
+  _helth: 1
+  _speedEffect: 1
+  _timeWork: 10
+  _timeSpawned: 2
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 2048

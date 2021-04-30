@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6300726742288505304}
   - component: {fileID: 784931366987283100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlaceForArtefact
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5639655630271784940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.377, z: 0}
-  m_LocalScale: {x: 1.0014135, y: 0.18014356, z: 0.61023635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_Color: {r: 0.33397114, g: 0.57239753, b: 0.8962264, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

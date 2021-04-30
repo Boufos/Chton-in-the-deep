@@ -58,30 +58,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acca74ff0c37e34ab5d286892e9002f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countPlaces: 15
-  _countArtefactsSpawn: 3
-  _countArtefacts: 3
-  _waitSpawn: 2
-  _arrayPlaces:
-  - {fileID: 1714619756866289629}
-  - {fileID: 56579192236703192}
-  - {fileID: 1714619758420024953}
-  - {fileID: 1714619757040140974}
-  - {fileID: 1714619757572270953}
-  - {fileID: 1714619756699605031}
-  - {fileID: 1714619757061248419}
-  - {fileID: 1714619756598853844}
-  - {fileID: 1714619757706502187}
-  - {fileID: 1714619758448738717}
-  - {fileID: 1714619757318744801}
-  - {fileID: 1714619757663441179}
-  - {fileID: 1714619758370063265}
-  - {fileID: 1714619758079365677}
-  - {fileID: 1714619757973923932}
-  _arrayArtefacts:
-  - {fileID: 5563180934059830141, guid: 0ece7590a44787e4caa0692e97b8387d, type: 3}
-  - {fileID: 1841608067748228012, guid: 7bb59c8ceb756d64ca79e8cad654effd, type: 3}
+  _countArtefacts: 20
+  _countArtefactSpawned: 3
+  _timeSpawn: 2
+  _artefactTypes:
+  - {fileID: 2489985664812313311, guid: 43afd494b85e07a44a788bca02fa4fb8, type: 3}
+  - {fileID: 2644419941644910799, guid: 15eb8cb8ddfd9aa4583b3409c9372dca, type: 3}
   - {fileID: 6240131413313047292, guid: a4b1a321dcb6f64408bf792ff96bed62, type: 3}
+  _front: {fileID: 7748732211117557668, guid: ab85b2709eaf5d8468e71ecf16292468, type: 3}
+  _spawner: {fileID: 3405909400446866161}
 --- !u!1001 &3405909398655549771
 PrefabInstance:
   m_ObjectHideFlags: 0

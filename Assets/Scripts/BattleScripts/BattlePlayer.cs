@@ -14,7 +14,7 @@ public class BattlePlayer : Character
         _timer = _stunTime + 1;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_timer > _stunTime)
         {
