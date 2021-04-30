@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [HideInInspector]
+
     public OuterPass Exit;
     [HideInInspector]
     public InnerPass Entrance;
@@ -19,10 +19,10 @@ public class Tile : MonoBehaviour
         get => _isOuterPassOpen;
         set
         {
-            _isOuterPassOpen = value;
             if (value)
             {
-                Exit.gameObject.SetActive(_isOuterPassOpen);
+                _isOuterPassOpen = value;
+                SetExitActive(value);
             }
 
         }
@@ -33,7 +33,7 @@ public class Tile : MonoBehaviour
     {
         Borders = GetComponentInChildren<Borders>();
         Entrance = GetComponentInChildren<InnerPass>();
-        Exit = GetComponentInChildren<OuterPass>();
+       // Exit = GetComponentInChildren<OuterPass>();
         _player = FindObjectOfType<Hero>();
     }
 
@@ -66,13 +66,20 @@ public class Tile : MonoBehaviour
         Level.Instance.SetCameraPosition();
 
     }
+    public void SetExitActive(bool isActive)
+    {
+        if(isActive)
+            Exit.gameObject.SetActive(_isOuterPassOpen);
+        if (isActive)
+        {
+            Exit.Animation.Play();
+            print("Exit open");
+        }
+        
+    }
  
     public void SetIsActive(bool value)
     {
-        if (value)
-        {
-            Exit.Animation.Play();
-        }
         IsGoalAchived = value;
     }
 }

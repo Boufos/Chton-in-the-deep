@@ -11,6 +11,7 @@ public class Statue : Lever
 
     override public void Interact()
     {
+        base.Interact();
         OnActive?.Invoke();
     }
 

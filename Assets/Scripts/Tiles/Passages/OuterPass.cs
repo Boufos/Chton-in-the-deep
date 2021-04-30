@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class OuterPass : Pass
 {
     protected override void PlayAnimations()
     {
         print("Animation Right");
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (ParentTile.IsGoalAchived)
@@ -17,7 +19,7 @@ public class OuterPass : Pass
         }
         //SwitchTile(collision.gameObject);
     }
-    override protected void SwitchTile(GameObject triger)
+    override protected void SwitchTile(GameObject trigger)
     {
         //if (ParentTile.IsGoalAchived)
         //{

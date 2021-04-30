@@ -38,9 +38,7 @@ public class InteractableObject : MonoBehaviour, IObject
     protected int _layerMask;
     protected RectMenu MenuPrefab;
     protected Action<bool, bool> OnEnableRectMenu;
-    [SerializeField]
     protected virtual bool isLookable  => true; 
-    [SerializeField]
     protected virtual bool isInteractable  => true; 
     private void Awake()
     {
@@ -65,7 +63,7 @@ public class InteractableObject : MonoBehaviour, IObject
         if (OnEnableRectMenu != null)
             OnEnableRectMenu -= EnableRectMenu;
     }
-    protected void OnMouseDown()
+    virtual protected void OnMouseDown()
     {
         OnEnableRectMenu?.Invoke(isLookable, isInteractable);
     }

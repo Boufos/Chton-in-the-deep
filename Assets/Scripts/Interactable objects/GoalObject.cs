@@ -22,7 +22,7 @@ public class GoalObject : InteractableObject
         else
         {
             _isActivated = true;
-            GetComponentInParent<Tile>().SetIsActive(true);
+            FindObjectOfType<Tile>().IsGoalAchived = true;
             _reactions.SetReaction(_reactions.InteractionPhrase);
 
         }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[RequireComponent(typeof(Animation))]
 abstract public class Pass : MonoBehaviour
 {
     protected Tile ParentTile;
@@ -14,6 +16,7 @@ abstract public class Pass : MonoBehaviour
         ParentTile = GetComponentInParent<Tile>();
         _player = FindObjectOfType<Hero>();
         Animation = GetComponent<Animation>();
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,7 +26,7 @@ abstract public class Pass : MonoBehaviour
             SwitchTile(collision.gameObject);
         }
     }
-    abstract protected void SwitchTile(GameObject triger);
+    abstract protected void SwitchTile(GameObject trigger);
     protected IEnumerator SetPlayerPosition(Vector2 position)
     {
        
