@@ -1,19 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 [RequireComponent(typeof(CharacterReaction))]
-public class InteractableObject : MonoBehaviour,IObject
+[RequireComponent(typeof(Collider2D))]
+public class InteractableObject : MonoBehaviour, IObject
 {
-    public RectMenu MenuPrefab;
+
     [HideInInspector]
     public Collider2D Collider;
-    public List<AssetItem> Items;
-    public bool IsActive;
+    public bool IsActivated;
+    protected bool _isActivated
+    {
+        get => IsActivated;
+        set
+        {
+            IsActivated = value;
+            if (value && OnEnableRectMenu != null)
+            {
+                OnEnableRectMenu = null;
+            }
+        }
+    }
 
     protected CharacterReaction _reactions;
     protected Inventory _invetory => Inventory.Instance;
-    protected DialogPanel _dialogPanel;
+    protected DialogPanel _dialogPanel => DialogPanel.Instance;
     [SerializeField]
     protected Hero _hero;
     [SerializeField]
@@ -22,9 +36,13 @@ public class InteractableObject : MonoBehaviour,IObject
     protected RectMenu _menu;
     [SerializeField]
     protected int _layerMask;
-
+    protected RectMenu MenuPrefab;
+    protected Action<bool, bool> OnEnableRectMenu;
+    protected virtual bool isLookable  => true; 
+    protected virtual bool isInteractable  => true; 
     private void Awake()
     {
+        MenuPrefab = Resources.Load<RectMenu>("Prefabs/Rect menu");
         Collider = GetComponent<Collider2D>();
         _reactions = GetComponent<CharacterReaction>();
         _hero = FindObjectOfType<Hero>();
@@ -32,43 +50,50 @@ public class InteractableObject : MonoBehaviour,IObject
     }
     virtual public void Look()
     {
-        //Íàâåðíîå íóæíî, ÷òî - òî ñêàçàòü
-       // _reactions.Reaction(_reactions.LookingPhrase);
+        _reactions.SetReaction(_reactions.LookingPhrase);
     }
-    virtual public void Interact()
+    virtual public void Interact() { }
+    private void OnEnable()
     {
-
-        //Íàâåðíîå íóæíî, ÷òî - òî ñêàçàòü
+        if (OnEnableRectMenu == null)
+            OnEnableRectMenu += EnableRectMenu;
     }
-
-    protected virtual void OnMouseDown()
+    private void OnDisable()
     {
-        _ray = GetToPlayerPlayerRaycast();
+        if (OnEnableRectMenu != null)
+            OnEnableRectMenu -= EnableRectMenu;
+    }
+    virtual protected void OnMouseDown()
+    {
+        OnEnableRectMenu?.Invoke(isLookable, isInteractable);
+    }
+    virtual protected void EnableRectMenu(bool isLook, bool isInteract)
+    {
+        _ray = GetToPlayerPlayerRaycast(transform.position);
         if (IsOnPlayer() && _ray.distance < toPlayerDistanceLimit)
         {
-            EnableRectMenu();
+            _menu = Instantiate(MenuPrefab);
+            _menu.transform.position = transform.position;
+            _menu.LookButton.gameObject.SetActive(isLook);
+            _menu.InteractionButton.gameObject.SetActive(isInteract);
+            _menu.Parent = this;
+            //Collider.enabled = false;
+            return;
         }
-        else
-        {
-            _reactions.Reaction("Íå ìîãó. Ñëèøêîì äàëåêî. ");
-        }
+        _reactions.SetReaction("�� ����. ������� ������.");
 
-    }
-    virtual protected void EnableRectMenu()
-    {
-
-        _menu = Instantiate(MenuPrefab, transform.position, MenuPrefab.transform.rotation);
-        _menu.Parent = this;
-        Collider.enabled = false;
     }
     protected bool IsOnPlayer()
     {
+        if (_ray.collider == null)
+        {
+            return true;
+        }
         return IsNeedLayer(_ray, _hero.gameObject.layer);
     }
-    private RaycastHit2D GetToPlayerPlayerRaycast()
+    private RaycastHit2D GetToPlayerPlayerRaycast(Vector3 target)
     {
-
-        var heading = _hero.transform.position - transform.position;
+        var heading = _hero.transform.position - target;
         var toPlyerDistance = Vector2.Distance(_hero.transform.position, transform.position);
         var toPlayerDirection = heading / heading.magnitude;
         Debug.DrawRay(transform.position, toPlyerDistance * toPlayerDirection, Color.red);

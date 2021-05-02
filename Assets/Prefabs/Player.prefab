@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5417801606261834940}
   - component: {fileID: 5417801606261834941}
   - component: {fileID: 5417801606261834936}
+  - component: {fileID: 1913131327884012150}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -150,14 +151,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9ebeb63469d584dbdffa2828af8695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 3
   _ground:
     serializedVersion: 2
     m_Bits: 8
-  _anim: {fileID: 5417801606261834941}
   _groundCheckPosition: {fileID: 4602586048049900091}
-  _radiusGroundCheck: 1
-  _jumpHeight: 10
+  _radiusGroundCheck: 0.1
+  _jumpHeight: 3
+  _speedJumpUp: 3
+  _speedFall: 0.9
   _nameAnimationInteraction: 
   _nameAnimationStay: 
   _nameAnimationMove: 
@@ -196,3 +198,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.3}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &1913131327884012150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5417801606261834914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574b9b519ea100549a17407a99dfc867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 2

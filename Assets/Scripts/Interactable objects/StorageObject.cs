@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class StorageObject : InteractableObject
 {
-
-    public override void Look()
-    {
-        if (Items.Count > 0)
-        {
-            _reactions.Reaction(_reactions.LookingPhraseBefore);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.LookingPhraseAfter);
-        }
-    }
+    public List<AssetItem> Items;
+    protected override bool isLookable => false;
+    protected override bool isInteractable => true;
     public override void Interact()
     {
         if (Items.Count > 0)
@@ -24,16 +15,9 @@ public class StorageObject : InteractableObject
             {
                 _invetory.AddItem(Items[i]);
                 Items.Remove(Items[i]);
-                _reactions.Reaction(_reactions.InteractionPhrase);
             }
-        }
-        if(Items.Count > 0)
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseAfter);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseBefore);
+            _reactions.SetReaction(_reactions.InteractionPhrase);
+            _isActivated = true;
         }
     }
 }

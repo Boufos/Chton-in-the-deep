@@ -20,22 +20,10 @@ public class RectMenu : MonoBehaviour
         {
             Instance = this;
         }
+
         InteractionButton = GetComponentInChildren<InteractoinButton>();
         LookButton = GetComponentInChildren<LookButton>();
         EmergensAnimation = GetComponent<Animation>();
-        if (Inventory.Instance != null)
-        {
-            Inventory.Instance.gameObject.SetActive(true);
-        }
-        if(Parent.IsActive || Parent is StorageObject || Parent is Lever)
-        {
-            LookButton.gameObject.SetActive(false);
-        }
-
-        if(Parent is PromptObject)
-        {
-            InteractionButton.gameObject.SetActive(false);
-        }
         EmergensAnimation.Play();
         FexedPosition();
     }
@@ -44,14 +32,6 @@ public class RectMenu : MonoBehaviour
     {
         if (GetToCursorDistance() > 5)
             Destroy(gameObject);
-
-    }
-    private void OnDestroy()
-    {
-        Parent.Collider.enabled = true;
-
-        //if(Inventory.Instance != null)
-        //    Inventory.Instance.gameObject.SetActive(false);
     }
     private float GetToCursorDistance()
     {
@@ -60,21 +40,12 @@ public class RectMenu : MonoBehaviour
     }
     private void FexedPosition()
     {
-        Vector2 cameraPosition = FindObjectOfType<Camera>().transform.position;
-        Vector2 directionToCamera = cameraPosition - (Vector2)transform.position;
-        Vector2 position = transform.position;
-        Vector2 screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        Vector3 cameraPosition = FindObjectOfType<Camera>().transform.position;
+        Vector3 directionToCamera = cameraPosition - transform.position;
+        Vector3 position = transform.position;
         directionToCamera /= directionToCamera.magnitude;
-        transform.position += (Vector3)directionToCamera * 3;
-        //if(Mathf.Abs(cameraPosition.x - transform.position.x) < 10)
-        //{
-
-        //    position.x += directionToCamera.x * 10;
-        //}
-        //if(Mathf.Abs(cameraPosition.y - transform.position.y) < 10)
-        //{
-        //    position.y += directionToCamera.y * 10; 
-        //}
-        //transform.position = position;
+        position = transform.position + directionToCamera * 3;
+        position.z = cameraPosition.z - directionToCamera.z * 3;
+        transform.position = position;
     }
 }

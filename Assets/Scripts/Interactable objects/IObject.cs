@@ -6,8 +6,6 @@ using UnityEngine;
 public interface IObject
 {
     public void Interact();
-    public void Look();
-
 }
 
 

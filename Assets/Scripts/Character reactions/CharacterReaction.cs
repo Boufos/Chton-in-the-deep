@@ -12,55 +12,23 @@ public class CharacterReaction : MonoBehaviour
 
     private int _noInteractionPhraseIndex = 0;
     
-    public string LookingPhraseBefore 
+    public string LookingPhrase 
     { 
-        get {return GetPhrase(_phrases.LookingPhrasesBefore, ref _lookingPhraseIndex);} 
-    }
-    public string LookingPhraseAfter
-    {
-        get { return GetPhrase(_phrases.LookingPhrasesAfter, ref _lookingPhraseIndex); }
+        get => GetPhrase(_phrases.LookingPhrases, ref _lookingPhraseIndex);
     }
     public string InteractionPhrase
     {
-        get { return GetPhrase(_phrases.LookingPhrasesBefore, ref _interactionPhraseIndex); }
+        get => GetPhrase(_phrases.InteractionPhrases, ref _interactionPhraseIndex); 
     }
-    public string InteractionPhraseAfter
-    {
-        get => GetPhrase(_phrases.AfterInteractionPhrases, ref _noInteractionPhraseIndex);
-    }
-    public string InteractionPhraseBefore
+    public string BeforeInteractionPhrase
     {
         get => GetPhrase(_phrases.BeforeInteractionPhrases, ref _noInteractionPhraseIndex);
     }
-    private Coroutine ShowPhrase;
-    public IEnumerator ShowText(string text)
-    {
-        int i = 0;
-        DialogPanel.Instance.Active(true);
-        if(text.Length < 1)
-        {
-            text = "    ";
-        }
-        do
-        {
-            DialogPanel.Instance.Text.text += text[i++];
-            yield return new WaitForSeconds(0.05f);
-        } while (i < text.Length);
 
-        do
-        {
-            yield return new WaitForSeconds(4);
-        } while (false);
-        DialogPanel.Instance.Active(false);
-    }
-    public void Reaction(string text)
+
+    public void SetReaction(string text)
     {
-        if (ShowPhrase != null)
-        {
-            DialogPanel.Instance.Active(false);
-            StopCoroutine(ShowPhrase);
-        }
-        ShowPhrase = StartCoroutine(ShowText(text));
+        DialogPanel.Instance.SetTextBox(text);
     }
     private string GetPhrase(List<string> phrases, ref int index)
     {

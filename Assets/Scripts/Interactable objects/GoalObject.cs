@@ -5,41 +5,27 @@ using UnityEngine;
 public class GoalObject : InteractableObject
 {
     [SerializeField]
-    private List<ItemInteractObject> _activators;
-    override public void Look()
-    {
-        if (!IsActive)
-        {
-            _reactions.Reaction(_reactions.LookingPhraseBefore);
-        }
-        else
-        {
-            _reactions.Reaction(_reactions.LookingPhraseAfter);
-        }
-    }
+    private List<InteractableObject> _activators;
+    protected override bool isLookable => true;
+    protected override bool isInteractable => true;
     override public void Interact()
     {
         bool isActive = true;
         for (int i = 0; i < _activators.Count; i++)
         {
-            isActive = isActive && _activators[i].IsActive;
+            isActive = isActive && _activators[i].IsActivated;
         }
-        if(isActive && !IsActive)
+        if (!isActive)
         {
-            IsActive = true;
-
-            GetComponentInParent<Tile>().SetIsActive(true);
-            _reactions.Reaction(_reactions.InteractionPhrase);
-        }
-
-        if(IsActive)
-        {
-            _reactions.Reaction(_reactions.InteractionPhraseAfter);
+            _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
         }
         else
         {
-            _reactions.Reaction(_reactions.InteractionPhraseBefore);
+            _isActivated = true;
+            FindObjectOfType<Tile>().IsGoalAchived = true;
+            _reactions.SetReaction(_reactions.InteractionPhrase);
+
         }
-     
+
     }
 }

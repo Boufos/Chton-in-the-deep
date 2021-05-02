@@ -5,18 +5,14 @@ using UnityEngine.Events;
 
 public class Statue : Lever
 {
-    [SerializeField][TextArea]
+    [SerializeField]
+    [TextArea]
     private string _LongReaction;
 
-    override protected void EnableRectMenu()
-    {
-        base.EnableRectMenu();
-
-    }
     override public void Interact()
     {
+        base.Interact();
         OnActive?.Invoke();
     }
-
 
 }
