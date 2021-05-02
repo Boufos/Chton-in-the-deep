@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae11fc87f6661243b2d5064c2d87fcf, type: 3}
   m_Name: Wire
   m_EditorClassIdentifier: 
-  _uIIcon: {fileID: 21300000, guid: d844920edc32e1d4590b8fde4fd9e95d, type: 3}
+  _uIIcon: {fileID: 21300000, guid: 5d8b5aee04c670f4a98d3457bbf865e2, type: 3}
   _name: Wire

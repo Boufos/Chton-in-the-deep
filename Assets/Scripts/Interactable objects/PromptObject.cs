@@ -12,8 +12,14 @@ public class PromptObject : InteractableObject
     protected override bool isInteractable => false;
     override public void Look()
     {
-        if (!_targetObject.IsActivated)
-            _reactions.SetReaction(_reactions.InteractionPhrase);
+            _reactions.SetReaction(_reactions.LookingPhrase);
+    }
+    override protected void OnMouseDown()
+    {
+        if(!_targetObject.IsActivated)
+        {
+            base.OnMouseDown();
+        }
     }
 
 }

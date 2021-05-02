@@ -2251,12 +2251,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5498f6acf6d0a1049b47bcdec6a89222, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c04c718720d3c8140bee25d0723ace9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 38.399998, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2280,7 +2280,6 @@ MonoBehaviour:
   PastTile: {fileID: 0}
   Pull: {fileID: 11400000, guid: 505940dbbde8f444593e8d3b628d3f6b, type: 2}
   Borders: {fileID: 0}
-  IsGoalAchived: 0
   ID: 8
 --- !u!114 &1759636832237623108
 MonoBehaviour:
@@ -2294,8 +2293,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9ebeb63469d584dbdffa2828af8695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _helth: 5
-  _restart: {fileID: 0}
+  _speed: 0
+  _ground:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheckPosition: {fileID: 0}
+  _radiusGroundCheck: 0
+  _jumpHeight: 0
+  _speedJumpUp: 0
+  _speedFall: 0
+  _nameAnimationInteraction: 
+  _nameAnimationStay: 
+  _nameAnimationMove: 
 --- !u!1 &7961303134251973651
 GameObject:
   m_ObjectHideFlags: 0
