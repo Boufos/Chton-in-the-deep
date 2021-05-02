@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puzzle2
       objectReference: {fileID: 0}
+    - target: {fileID: 8890846078928106611, guid: ae0487da663904d4183dc1a3b2020ff8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae0487da663904d4183dc1a3b2020ff8, type: 3}
 --- !u!1001 &1106797515
@@ -197,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4365094500885191420, guid: 37e23d4be3b9ca343bacc84cab53266d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4365094500885191421, guid: 37e23d4be3b9ca343bacc84cab53266d, type: 3}
       propertyPath: m_RootOrder

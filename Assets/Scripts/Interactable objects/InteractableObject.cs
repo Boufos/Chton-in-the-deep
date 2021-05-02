@@ -36,7 +36,7 @@ public class InteractableObject : MonoBehaviour, IObject
     protected RectMenu _menu;
     [SerializeField]
     protected int _layerMask;
-    protected RectMenu MenuPrefab;
+    [SerializeField] protected RectMenu MenuPrefab;
     protected Action<bool, bool> OnEnableRectMenu;
     protected virtual bool isLookable  => true; 
     protected virtual bool isInteractable  => true; 

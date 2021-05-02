@@ -6,7 +6,11 @@ using UnityEngine.EventSystems;
 public class puzzle : MonoBehaviour, IPointerClickHandler
 {
     public GameObject puzzleArea;
-    bool onPuzzleArea;
+
+    public bool IsReadyToStart;
+
+    private bool onPuzzleArea;
+
 
     private void Start()
     {
@@ -15,6 +19,10 @@ public class puzzle : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData)
+    {
+    }
+
+    public void ActivatePuzzle()
     {
         if (onPuzzleArea == false)
         {
@@ -29,6 +37,5 @@ public class puzzle : MonoBehaviour, IPointerClickHandler
 
         }
     }
-
  
 }

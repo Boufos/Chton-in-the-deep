@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SwitchPuzzle : MonoBehaviour
 {
+    [SerializeField] GameObject _canvas;
+
     [SerializeField] List<GameObject> buttonPosition;
 
     private void Start()
@@ -36,7 +38,16 @@ public class SwitchPuzzle : MonoBehaviour
             CheckColor(index - 1);
         }
 
+        foreach (var item in buttonPosition)
+        {
+            if ( item.GetComponent<Image>().color == Color.white)
+            {
+                return;
+            }
+        }
 
+        FindObjectOfType<Tile>().IsGoalAchived = true;
+        _canvas.SetActive(false);
     }
 
     private void CheckColor(int index)

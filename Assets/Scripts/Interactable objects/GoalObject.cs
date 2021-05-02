@@ -8,6 +8,13 @@ public class GoalObject : InteractableObject
     private List<InteractableObject> _activators;
     protected override bool isLookable => true;
     protected override bool isInteractable => true;
+
+    private puzzle _puzzle;
+
+    private void Awake()
+    {
+        _puzzle = gameObject.GetComponent<puzzle>();
+    }
     override public void Interact()
     {
         bool isActive = true;
@@ -17,13 +24,15 @@ public class GoalObject : InteractableObject
         }
         if (!isActive)
         {
-            _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
+            //_reactions.SetReaction(_reactions.BeforeInteractionPhrase);
+
+            _puzzle.ActivatePuzzle();
         }
         else
         {
             _isActivated = true;
             FindObjectOfType<Tile>().IsGoalAchived = true;
-            _reactions.SetReaction(_reactions.InteractionPhrase);
+           // _reactions.SetReaction(_reactions.InteractionPhrase);
 
         }
 

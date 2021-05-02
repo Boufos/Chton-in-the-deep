@@ -193,13 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c5ba82ac2108141be432234c478bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPrefab: {fileID: 5526126805101396710, guid: 4b940fb3aad16784e95852b11beb9416, type: 3}
   Collider: {fileID: 0}
-  Items:
-  - {fileID: 11400000, guid: fc57bee1ee00b9345897f65747ba741f, type: 2}
-  IsActive: 0
+  IsActivated: 0
+  _hero: {fileID: 0}
   toPlayerDistanceLimit: 5
   _layerMask: 0
+  Items:
+  - {fileID: 11400000, guid: fc57bee1ee00b9345897f65747ba741f, type: 2}
 --- !u!1 &4491847816462747982
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,10 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a06e21f5121664abc26c36f2bd54d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPrefab: {fileID: 5526126805101396710, guid: 4b940fb3aad16784e95852b11beb9416, type: 3}
   Collider: {fileID: 0}
-  Items: []
-  IsActive: 0
+  IsActivated: 0
+  _hero: {fileID: 0}
   toPlayerDistanceLimit: 5
   _layerMask: 0
   _activators: []
@@ -595,7 +594,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8904960050361471256
@@ -616,7 +615,6 @@ MonoBehaviour:
   PastTile: {fileID: 0}
   Pull: {fileID: 11400000, guid: ea690add289c59d40866e65f32f77712, type: 2}
   Borders: {fileID: 0}
-  IsGoalAchived: 0
   ID: 6
 --- !u!1 &7868251124151128904
 GameObject:
@@ -631,6 +629,8 @@ GameObject:
   - component: {fileID: 8440313906163384251}
   - component: {fileID: 2117432636404800592}
   - component: {fileID: 2117432636404800599}
+  - component: {fileID: 9038915043572212866}
+  - component: {fileID: 2621424734303561656}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -749,18 +749,53 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7868251124151128904}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 130b0bb2fb5090b4bb8c596e4baaec46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPrefab: {fileID: 5526126805101396710, guid: 4b940fb3aad16784e95852b11beb9416, type: 3}
   Collider: {fileID: 0}
-  Items:
-  - {fileID: 11400000, guid: fc57bee1ee00b9345897f65747ba741f, type: 2}
-  IsActive: 0
+  IsActivated: 0
+  _hero: {fileID: 0}
   toPlayerDistanceLimit: 5
   _layerMask: 0
+  Items:
+  - {fileID: 11400000, guid: fc57bee1ee00b9345897f65747ba741f, type: 2}
+  isInteracted: 0
+--- !u!114 &9038915043572212866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868251124151128904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c90c2bf1b22e24ba7460d1c0b46eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  IsActivated: 0
+  _hero: {fileID: 0}
+  toPlayerDistanceLimit: 5
+  _layerMask: 0
+  Items:
+  - {fileID: 11400000, guid: fc57bee1ee00b9345897f65747ba741f, type: 2}
+  isInteracted: 0
+--- !u!114 &2621424734303561656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868251124151128904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05801c4b195f44b49a1ce14a980c698d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleArea: {fileID: 0}
+  IsReadyToStart: 0
 --- !u!1 &7952526658575887914
 GameObject:
   m_ObjectHideFlags: 0

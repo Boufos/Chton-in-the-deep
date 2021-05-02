@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class StatueHead : StorageObject
 {
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject BattleWindow;
+
     public override void Interact()
     {
         base.Interact();
@@ -12,6 +15,13 @@ public class StatueHead : StorageObject
         {
             DisabledObject(gameObject);
         }
+    }
+
+    protected override void OnMouseDown()
+    {
+        Player.SetActive(false);
+        BattleWindow.SetActive(true);
+        base.OnMouseDown();
     }
 
     private void DisabledObject(GameObject gameObject)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hero : Character
 {
+    static public Hero Instance;
     enum StateAnimation
     {
         interraction,
@@ -12,7 +13,7 @@ public class Hero : Character
     }
 
     [SerializeField] private LayerMask _ground;
-   // [SerializeField] private Animator _anim;
+    // [SerializeField] private Animator _anim;
     [SerializeField] private Transform _groundCheckPosition;
 
     [SerializeField] private float _radiusGroundCheck;
@@ -31,12 +32,24 @@ public class Hero : Character
     private float _currentJumpTime = 0;
 
     private bool _canJump = false;
-    
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Update()
     {
         _direction = Input.GetAxis("Horizontal");
         Move(_direction);
-        if(_direction != 0)
+        if (_direction != 0)
         {
             _stateAnimation = StateAnimation.move;
         }
@@ -48,7 +61,7 @@ public class Hero : Character
         //Добавить условие для вызова Interaction()
 
         #region Jump
-        if (Physics2D.OverlapCircle(_groundCheckPosition.position,_radiusGroundCheck, _ground))
+        if (Physics2D.OverlapCircle(_groundCheckPosition.position, _radiusGroundCheck, _ground))
         {
             _canJump = true;
         }
@@ -64,11 +77,11 @@ public class Hero : Character
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if(_rb.velocity.y >= 0)
-            _rb.velocity = new Vector2(_rb.velocity.x, -1 * (Mathf.Pow(_currentJumpTime, 2) * _speedJumpUp) + _jumpHeight);
+            if (_rb.velocity.y >= 0)
+                _rb.velocity = new Vector2(_rb.velocity.x, -1 * (Mathf.Pow(_currentJumpTime, 2) * _speedJumpUp) + _jumpHeight);
         }
 
-        if(_rb.velocity.y < 0)
+        if (_rb.velocity.y < 0)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * _speedFall);
         }
@@ -83,7 +96,7 @@ public class Hero : Character
     {
         _stateAnimation = StateAnimation.interraction;
     }
-    
+
     //private void PlayAnimation()
     //{
     //    switch (_stateAnimation)

@@ -5,11 +5,13 @@ using UnityEngine;
 public class ItemInteractObject : InteractableObject
 {
     public List<AssetItem> Items;
+
+    public bool isInteracted;
     protected override bool isLookable => true;
     protected override bool isInteractable => true;
     override public void Interact()
     {
-        bool isInteracted = true;
+        isInteracted = true;
         if (Items.Count > 0 && !IsActivated)
         {
 
@@ -33,11 +35,12 @@ public class ItemInteractObject : InteractableObject
         }
         if (isInteracted)
         {
-            _reactions.SetReaction(_reactions.InteractionPhrase);
+            //_reactions.SetReaction(_reactions.InteractionPhrase);
+
         }
         else
         {
-            _reactions.SetReaction(_reactions.BeforeInteractionPhrase);
+            //_reactions.SetReaction(_reactions.BeforeInteractionPhrase);
 
         }
         _isActivated = isInteracted;
