@@ -5,7 +5,11 @@ using UnityEngine.Events;
 
 public class StatueHead : StorageObject
 {
+    [SerializeField] private GameObject _battleWindow;
+    [SerializeField] private GameObject _player;
+
     private Coroutine _onDestroyBlock;
+
     public override void Look()
     {
         base.Look();
@@ -38,5 +42,12 @@ public class StatueHead : StorageObject
         } while (i < 2);
         _onDestroyBlock = null;
         Destroy(gameObject);
+    }
+
+    protected override void OnMouseDown()
+    {
+        base.OnMouseDown();
+        _player.SetActive(false);
+        _battleWindow.SetActive(true);
     }
 }

@@ -1,11 +1,18 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Unity;
 
 public class CreatorWaveEnemy : EditorWindow
 {
+    [SerializeField]
     private Enemy _enemy;
+    
+    [SerializeField]
+    private List<Enemy> _enemies = new List<Enemy>();
+
+    private List<string> _namesEnemies = new List<string>();
+
+    private GameObject _currentObject;
 
     private List<GameObject> _arrayCopyWaves = new List<GameObject>();
 
@@ -14,24 +21,27 @@ public class CreatorWaveEnemy : EditorWindow
     private Vector2 _scrollVector;
 
     private string _name;
+    private string _pathAsset = "Assets/ScriptableObject/Enemy/";
 
     private int _fade = 0;
-
     private int _countWave = 0;
+    private int _indexCurrentEnemy;
 
     public int CountWave
     {
         get => _countWave;
         set
         {
-            if (value > 0)
+            
+
+            if (value >= 0)
             {
                 if (value > _countWave)
                 {
                     for (int i = 0; i < value - _countWave; i++)
                     {
                         _waves.Add(new List<GameObject>());
-                        _waves[_waves.Count - 1].Add(new GameObject());
+                        _waves[_waves.Count - 1].Add(null);
                     }
                 }
                 else if (value < _countWave)
@@ -42,7 +52,14 @@ public class CreatorWaveEnemy : EditorWindow
                     }
                 }
             }
-            _countWave = value;
+            if (value <= 0)
+            {
+                _countWave = 0;
+            }
+            else
+            {
+                _countWave = value;
+            }
         }
     }
 
@@ -72,6 +89,7 @@ public class CreatorWaveEnemy : EditorWindow
 
         _label.Add(GUILayout.MaxWidth(130));
 
+        
     }
 
     private void OnGUI()
@@ -90,11 +108,49 @@ public class CreatorWaveEnemy : EditorWindow
         _scrollVector = GUILayout.BeginScrollView(_scrollVector);
         
         EditorGUILayout.BeginHorizontal();
-        _enemy = EditorGUILayout.ObjectField(_enemy, typeof(Object), true) as Enemy;
-        EditorGUILayout.EndHorizontal();
+        _name = EditorGUILayout.TextField("Имя", _name); 
+        _enemies.Clear();
+        _namesEnemies.Clear();
+        foreach (var item in Resources.FindObjectsOfTypeAll<Enemy>())
+        {
+            _enemies.Add(item);
+            _namesEnemies.Add(item.Name);
+            Debug.Log(item.Name);
+        }
+        if (_enemies.Count > 0)
+        {
+            EditorGUILayout.LabelField("Выбрать врага");
+            _indexCurrentEnemy = EditorGUILayout.Popup(_indexCurrentEnemy, _namesEnemies.ToArray());
+            _enemy = _enemies[_indexCurrentEnemy];
+        }
+        if (GUILayout.Button("Load", _buttonCopyPaste.ToArray()) && _enemies.Count > 0)
+        {
+            if(_enemy)
+            {
+                _name = _enemy.Name;
+                Debug.Log(_name);
+                _waves.Clear();
 
+                int _currentCountWaves = 0;
+                for (int i = 0; i < _enemy.WaveCounters.Length; i++)
+                {
+                    _waves.Add(new List<GameObject>());
+                    for (int j = 0; j < _enemy.WaveCounters[i]; j++)
+                    {
+                        _waves[i].Add(null);
+                        _waves[i][j] = _enemy.Waves[_currentCountWaves];
+                        _currentCountWaves++;
+                    }
+                }
+
+                _countWave = _waves.Count;
+            }
+        }
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Количество волн", _label.ToArray());
+
+
         if (GUILayout.Button("-", _button.ToArray()))
         {
             CountWave--;
@@ -103,7 +159,8 @@ public class CreatorWaveEnemy : EditorWindow
         {
             CountWave++;
         }
-        CountWave = EditorGUILayout.IntField(CountWave,GUILayout.Width(92.5f));
+        CountWave = EditorGUILayout.IntField(CountWave, GUILayout.Width(92.5f));
+
         EditorGUILayout.LabelField("     Артефакты", _label.ToArray());
         EditorGUILayout.EndHorizontal();
 
@@ -126,11 +183,12 @@ public class CreatorWaveEnemy : EditorWindow
 
                 if (GUILayout.Button("-", _button.ToArray()) && _waves[i].Count > 1)
                 {
+                    DestroyImmediate(_waves[i][_waves[i].Count - 1]);
                     _waves[i].RemoveAt(_waves[i].Count - 1);
                 }
                 if (GUILayout.Button("+", _button.ToArray()))
                 {
-                    _waves[i].Add(new GameObject());
+                    _waves[i].Add(null);
                 }
 
                 for (int j = 0; j < _waves[i].Count; j++)
@@ -145,9 +203,56 @@ public class CreatorWaveEnemy : EditorWindow
         EditorGUILayout.EndFadeGroup();
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Save", _buttonCopyPaste.ToArray()))
+        if (GUILayout.Button("Save", _buttonCopyPaste.ToArray()) && _name != null)
         {
 
+            if (!_namesEnemies.Contains(_name))
+            {
+                _enemy = ScriptableObject.CreateInstance<Enemy>();
+                AssetDatabase.CreateAsset(_enemy, $"{_pathAsset}{_name}.asset");
+            }
+
+            int _maxWaves = 0;
+            foreach (var item in _waves)
+            {
+                foreach (var item2 in item)
+                {
+                    _maxWaves++;
+                }
+            }
+            _enemy.WaveCounters = new int[_waves.Count];
+            _enemy.Waves = new GameObject[_maxWaves];
+            int _currentCountWave = 0;
+            int _currentCountWaves = 0;
+            foreach (var item in _waves)
+            {
+                _enemy.WaveCounters[_currentCountWave] = 0;
+                foreach (var item2 in item)
+                {
+                    _enemy.Waves[_currentCountWaves] = item2;
+                    _currentCountWaves++;
+                    _enemy.WaveCounters[_currentCountWave]++;
+                }
+                _currentCountWave++;
+            }
+
+            _enemy.Name = _name;
+            AssetDatabase.WriteImportSettingsIfDirty($"{_pathAsset}{_name}.asset");
+            AssetDatabase.SaveAssets();
+
+            _enemies.Clear();
+            _namesEnemies.Clear();
+            foreach (var item in Resources.FindObjectsOfTypeAll<Enemy>())
+            {
+                _enemies.Add(item);
+                _namesEnemies.Add(item.Name);
+            }
+            EditorUtility.SetDirty(_enemy);
+        }
+        if (GUILayout.Button("Delete", _buttonCopyPaste.ToArray()))
+        {
+            FileUtil.DeleteFileOrDirectory($"{_pathAsset}{_name}.asset");
+            FileUtil.DeleteFileOrDirectory($"{_pathAsset}{_name}.asset.meta");
         }
         EditorGUILayout.EndHorizontal();
 

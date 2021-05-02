@@ -34,6 +34,14 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        _timeShoot = 2 / _artefact._speedEffect * _speedShooting;
+
+        if(_timer > _timeShoot)
+        {
+            Activate();
+            _timer = 0;
+        }
+        _timer += Time.deltaTime; 
     }
 
     public void Activate()
@@ -41,6 +49,7 @@ public class Gun : MonoBehaviour
         _bullets[_currentBullet].GetComponent<Rigidbody2D>().AddForce(Vector2.right * _speedBullet);
 
         _currentBullet++;
+
         if (_currentBullet == _countBullet)
         {
             _currentBullet = 0;

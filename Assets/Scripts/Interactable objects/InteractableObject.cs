@@ -41,9 +41,8 @@ public class InteractableObject : MonoBehaviour,IObject
         //Íàâåðíîå íóæíî, ÷òî - òî ñêàçàòü
     }
 
-    protected void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
-
         _ray = GetToPlayerPlayerRaycast();
         if (IsOnPlayer() && _ray.distance < toPlayerDistanceLimit)
         {

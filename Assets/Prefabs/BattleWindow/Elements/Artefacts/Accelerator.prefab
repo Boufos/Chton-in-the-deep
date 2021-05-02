@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4269200195269105198, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4269200195269105198, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -101,7 +101,15 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8863755712689642066, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}
+      propertyPath: _maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863755712689642066, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}
       propertyPath: EffectSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863755712689642066, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}
+      propertyPath: _speedEffect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8863755712689642066, guid: 2aca4f8d52fe0214ea913b1b2be80ec1, type: 3}

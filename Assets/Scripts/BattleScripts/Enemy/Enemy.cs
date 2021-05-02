@@ -1,9 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class Enemy : MonoBehaviour
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy Data", order = 51)]
+public class Enemy : ScriptableObject
 {
-    [HideInInspector] public List<List<GameObject>> Waves;
-    
+    [SerializeField]
+    public string Name;
+
+    [SerializeField]
+    public GameObject[] Waves;
+
+    [SerializeField]
+    public int[] WaveCounters;
 }
